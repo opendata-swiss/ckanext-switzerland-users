@@ -3,6 +3,8 @@
 import ckan.plugins as plugins
 from ckan.lib.plugins import DefaultTranslation
 import ckan.plugins.toolkit as toolkit
+from ckanext.switzerland_users import logic as ogdch_user_logic
+from ckanext.switzerland_users import helpers as ogdch_user_helpers
 import logging
 log = logging.getLogger(__name__)
 
@@ -29,6 +31,7 @@ class OgdchUsersPlugin(plugins.SingletonPlugin, DefaultTranslation):
         Expose new API methods
         """
         return {
+            'ogdch_get_roles_for_user': ogdch_user_logic.ogdch_get_roles_for_user,
         }
 
     # ITemplateHelpers
@@ -38,11 +41,16 @@ class OgdchUsersPlugin(plugins.SingletonPlugin, DefaultTranslation):
         Provide template helper functions
         """
         return {
+            'ogdch_list_user': ogdch_user_helpers.ogdch_list_user,  # noqa
         }
 
     # IRouter
 
     def before_map(self, map):
         """adding custom routes to the ckan mapping"""
+
+        map.connect('/user/',
+                    controller='ckanext.switzerland_users.controllers:OgdchUserController',  # noqa
+                    action='index')
 
         return map
