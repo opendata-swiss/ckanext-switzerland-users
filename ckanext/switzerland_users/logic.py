@@ -4,6 +4,9 @@ from collections import namedtuple
 from ckan import authz
 import ckan.logic as logic
 import ckan.plugins.toolkit as tk
+import ckan.lib.mailer as mailer
+from ckan.logic.action.create import user_create as core_user_create
+from ckanext.switzerland_users.mailer import send_registration_email
 
 Member = namedtuple('member', 'role organization')
 Admin = namedtuple('admin', 'role organizations')
@@ -227,3 +230,21 @@ def _user_role_organization_match(user_memberships, q_role, q_organization):
     role in an organization"""
     return [member for member in user_memberships
             if member.role.lower() == q_role.lower() and q_organization == member.organization]  # noqa
+
+
+def ogdch_user_create(context, data_dict):
+    """overwrites the core user creation to send an email
+    to new users"""
+    user = core_user_create(context, data_dict)
+    tk.get_action('ogdch_add_users_to_groups')(context, {'user_id': user['id']})  # noqa
+    send_email_on_registration = config.get('ckanext.switzerland.send_email_on_user_registration', True)  # noqa
+    if send_email_on_registration and user.get('email'):
+        try:
+            send_registration_email(user)
+        except (socket_error, mailer.MailerException) as error:
+            h.flash_warning("The email could not be send to {} for user {}. An error {} occured"  # noqa
+                            .format(user['name'], user['email'], error))  # noqa
+        else:
+            h.flash_success("An email has been send to the user {} at {}."  # noqa
+                            .format(user['name'], user['email']))
+    return user

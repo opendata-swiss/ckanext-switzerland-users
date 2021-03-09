@@ -35,6 +35,7 @@ class OgdchUsersPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'ogdch_get_admin_organizations_for_user': ogdch_user_logic.ogdch_get_admin_organizations_for_user,  # noqa
             'ogdch_get_users_with_organizations': ogdch_user_logic.ogdch_get_users_with_organizations,  # noqa
             'ogdch_user_list': ogdch_user_logic.ogdch_user_list,
+            'user_create': ogdch_user_logic.ogdch_user_create
         }
 
     # ITemplateHelpers
