@@ -1,4 +1,4 @@
-# Ckan extention to handle the user management of opendata.swiss
+# Ckan extension to handle the user management of opendata.swiss
 
 This ckan extensions adds user management to opendata.swiss:
 
