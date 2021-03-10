@@ -53,7 +53,7 @@ class OgdchUsersPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def before_map(self, map):
         """adding custom routes to the ckan mapping"""
 
-        map.connect('user_index', '/user/',
+        map.connect('user.index', '/user/',
                     controller='ckanext.switzerland_users.controllers:OgdchUserController',  # noqa
                     action='index')
 

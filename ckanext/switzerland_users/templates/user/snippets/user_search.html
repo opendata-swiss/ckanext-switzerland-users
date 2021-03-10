@@ -6,7 +6,7 @@
   <h2 class="module-heading">{{ _('Users') }}</h2>
   <form id="user-search-form"
         class="module-content field-bordered"
-        action="{% url_for('user_index') %}"
+        action="{% url_for('user.index') %}"
         method="get">
     <div class="field">
       <label for="field-user-search">{{ _('Search Users') }}</label>
@@ -30,7 +30,7 @@
       {{ form.select('organization', label=_('Organizations'), options=c.organizations, selected=c.organization, error='',  attrs=format_attrs, is_required=false) }}
     </div>
     <div class="reset-search">
-      <a href="{% url_for('user_index') %}"><i class="fa fa-times-circle" aria-hidden="true"></i> {{ _('Reset search') }}</a>
+      <a href="{% url_for('user.index') %}"><i class="fa fa-times-circle" aria-hidden="true"></i> {{ _('Reset search') }}</a>
     </div>
   </form>
 </section>
