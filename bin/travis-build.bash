@@ -46,12 +46,6 @@ cd ckan
 paster db init -c test-core.ini
 cd -
 
-echo "Installing ckanext-fluent and its requirements..."
-git clone https://github.com/ckan/ckanext-fluent
-cd ckanext-fluent
-python setup.py develop
-cd -
-
 echo "Installing ckanext-hierarchy and its requirements..."
 git clone https://github.com/opendata-swiss/ckanext-hierarchy
 cd ckanext-hierarchy
