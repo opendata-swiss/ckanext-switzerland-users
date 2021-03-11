@@ -38,7 +38,7 @@ class OgdchUserController(UserController):
         c.page = {
             'users': users[c.pagination.get('offset', 0):c.pagination.get('offset', 0) + page_size],  # noqa
         }
-        return render('user/list.html')
+        return render('user/ogdch_list.html')
 
 
 def _get_pagination(request, count, page_size):
