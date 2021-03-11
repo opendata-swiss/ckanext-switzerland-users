@@ -2,7 +2,6 @@
 
 from collections import namedtuple
 from ckan import authz
-import ckan.logic as logic
 import ckan.plugins.toolkit as tk
 
 Member = namedtuple('member', 'role organization')
