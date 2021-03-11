@@ -59,7 +59,7 @@ python setup.py develop
 cd -
 
 echo "Installing ckanext-switzerland_users..."
-git clone https://github.com/ckan/ckanext-switzerland_users
+git clone https://github.com/opendata-swiss/ckanext-switzerland_users
 cd ckanext-switzerland_users
 python setup.py develop
 cd -
