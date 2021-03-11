@@ -60,8 +60,8 @@ cd -
 
 echo "Installing ckanext-switzerland_users..."
 git clone https://github.com/opendata-swiss/ckanext-switzerland_users
-cd ckanext-switzerland_users
 python setup.py develop
+pip install -r requirements.txt
 pip install -r dev-requirements.txt
 cd -
 
