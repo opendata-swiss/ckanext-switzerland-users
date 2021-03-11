@@ -64,8 +64,4 @@ cd ckanext-switzerland_users
 python setup.py develop
 cd -
 
-echo "Moving test.ini into a subdir..."
-mkdir subdir
-mv test.ini subdir
-
 echo "travis-build.bash is done."
