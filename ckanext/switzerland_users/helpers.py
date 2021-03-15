@@ -23,7 +23,7 @@ def ogdch_list_user(user, maxlength=0):
     return {
         'link': tags.link_to(
             user_obj['name'],
-            url_for('user.read', id=user_obj['id'])),
+            url_for('user.read', id=user_obj['name'])),
         'email': display_email,
         'userroles': user_organization_roles,
     }
