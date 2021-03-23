@@ -25,7 +25,7 @@
         </thead>
         <tbody>
           {% for user in c.page.users %}
-            {% set user_display =  h.ogdch_list_user(user['name']) %}
+            {% set user_display =  h.ogdch_list_user(user) %}
             <tr>
               <td class="media">
                 {{ user_display.get('link') }}

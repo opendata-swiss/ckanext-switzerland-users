@@ -1,13 +1,22 @@
 # coding=UTF-8
 
 from collections import namedtuple
-from ckan import authz
+from ckan import authz, model
 import ckan.plugins.toolkit as tk
+from ckan.model.user import User
 
 Member = namedtuple('member', 'role organization')
 Admin = namedtuple('admin', 'role organizations')
 CAPACITY_SYSADMIN = 'sysadmin'
 CAPACITY_ADMIN = 'admin'
+
+
+def get_users_with_id():
+    """get users with only minimal attributes and a simple query to
+    avoid preformance issues"""
+    users = model.Session.query(User).all()
+    user_dict = {user.name: user for user in users}
+    return user_dict
 
 
 def ogdch_get_roles_for_user(context, data_dict):
@@ -120,7 +129,12 @@ def ogdch_user_list(context, data_dict):
     q_organization = data_dict.get('organization')
     q_role = data_dict.get('role')
 
-    user_list = tk.get_action('user_list')(context, {'q': q})  # noqa
+    user_list_names_only = tk.get_action('user_list')(context, {'q': q, 'all_fields': False})  # noqa
+    user_dict = get_users_with_id()
+    user_list = [{'name': username,
+                  'id': user_dict[username].id,
+                  'sysadmin': user_dict[username].sysadmin,
+                  'email': user_dict[username].email} for username in user_list_names_only]  # noqa
 
     admin_organizations_for_user = tk.get_action('ogdch_get_admin_organizations_for_user')(context, data_dict)  # noqa
     current_user_admin_capacity = _check_admin_capacity_for_user(current_user, admin_organizations_for_user)  # noqa
