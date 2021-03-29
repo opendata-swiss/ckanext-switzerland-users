@@ -36,10 +36,13 @@ class OgdchUserController(UserController):
         except tk.NotAuthorized:
             tk.abort(403, _('Not authorized to see this page'))
 
+        user_admin_organizations = tk.get_action('ogdch_get_admin_organizations_for_user')(context, {})  # noqa
+        if not user_admin_organizations:
+            tk.abort(403, _('Not authorized to see this page'))
+
         users = tk.get_action('ogdch_user_list')(context, data_dict)
         organization_tree = tk.get_action('group_tree')(context, {'type': 'organization'})  # noqa
         userroles = tk.get_action('member_roles_list')(context, {'group_type': 'organization'})  # noqa
-        user_admin_organizations = tk.get_action('ogdch_get_admin_organizations_for_user')(context, {})  # noqa
 
         c.pagination = _get_pagination(request, len(users), page_size)
         c.roles = _get_role_selection(c.user, userroles)
@@ -57,6 +60,8 @@ def _get_role_selection(current_user, userroles):
     if authz.is_sysadmin(current_user):
         userroles_display.append({'text': 'Sysadmin', 'value': 'sysadmin'})
     userroles_display.extend(list(userroles))
+    log.error("=================set user roles")
+    log.error("userroles")
     return userroles_display
 
 
