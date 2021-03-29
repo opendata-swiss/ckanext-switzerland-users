@@ -2,13 +2,17 @@
 
 import logging
 import re
+import csv
+from StringIO import StringIO
 
 from ckan import authz
 from ckan.controllers.user import UserController
 from ckan.common import c, request, config, _
 from ckan.lib.base import render
 import ckan.plugins.toolkit as tk
-from ckanext.switzerland.helpers.frontend_helpers import get_localized_value_for_display  # noqa
+from ckanext.switzerland_users.helpers import ogdch_display_memberships
+from ckanext.switzerland.helpers.frontend_helpers import \
+    get_localized_value_for_display
 
 log = logging.getLogger(__name__)
 
@@ -52,6 +56,30 @@ class OgdchUserController(UserController):
             'users': users[c.pagination.get('offset', 0):c.pagination.get('offset', 0) + page_size],  # noqa
         }
         return render('user/ogdch_list.html')
+
+    def csv(self):
+        if not authz.is_sysadmin(c.user):
+            tk.abort(403, _('Not authorized to see this page'))
+        tk.response.headers.update({'Content-type': "text/csv"})
+        context = {'user': c.user,
+                   'auth_user_obj': c.userobj}
+        users = tk.get_action('ogdch_user_list')(context, {})
+        content = StringIO()
+        writer = csv.writer(
+            content, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        writer.writerow([
+            _("Username"),
+            _("Email"),
+            _("Role")]
+        )
+        for user in users:
+            writer.writerow([
+                user['name'].encode('utf-8'),
+                user['email'].encode('utf-8'),
+                ogdch_display_memberships(user).encode('utf-8')
+            ])
+        return content.getvalue()
+
 
 
 def _get_role_selection(current_user, userroles):

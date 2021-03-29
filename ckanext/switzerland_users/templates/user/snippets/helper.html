@@ -8,6 +8,16 @@
       <li>{{ _('Sysadmins are allowed to see all users.') }}</li>
       <li>{{ _('Admins are allowed to see all users in their organizations.') }}</li>
     </ul>
-    <p>{{ _('Roles cascade to suborganizations. User roles in suborganizations are only shown if they differ from the role in the top level organization') }}</p>
+    <p>{{ _('Roles cascade to suborganizations. User roles in suborganizations are only shown if they differ from the role
+    in the top level organization') }}</p>
+    {% set is_sysadmin = h.check_access('sysadmin') %}
+    {% if is_sysadmin %}
+      <a href="{{ h.url_for('/users_csv') }}"
+         class="btn btn-primary btn-xs" role="button" target="_blank"
+         download="users">
+        <i class="fa fa-arrow-circle-o-down"></i>
+        {{ _('Download Users') }}
+      </a>
+    {% endif %}
   </div>
 </div>
