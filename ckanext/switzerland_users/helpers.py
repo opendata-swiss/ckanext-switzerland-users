@@ -2,19 +2,18 @@
 
 from webhelpers.html import tags
 from ckan.lib.helpers import url_for
-import ckan.logic as logic
 from ckanext.switzerland.helpers.frontend_helpers import get_localized_value_for_display  # noqa
 
 
 def ogdch_list_user(user, maxlength=0):
     """display user in user list"""
-    user_organization_roles = []
+    user_memberships = user.get('memberships', [])
+    memberships_display = []
     if not user.get('sysadmin'):
-        userroles = logic.get_action('ogdch_get_roles_for_user')({}, {u'id': user['id']})  # noqa
-        for role in userroles:
-            user_organization_roles.append(tags.link_to(
-                role.get('role').capitalize() + ": " + get_localized_value_for_display(role.get('organization_title')),  # noqa
-                url_for('organization_read', action='read', id=role.get('organization'))))  # noqa
+        for role in user_memberships:
+            memberships_display.append(tags.link_to(
+                role.capacity.capitalize() + ": " + get_localized_value_for_display(role.organization.title),  # noqa
+                url_for('organization_read', action='read', id=role.organization.name)))  # noqa
     display_email = user.get('email', '-')
     if not display_email:
         display_email = ''
@@ -23,5 +22,5 @@ def ogdch_list_user(user, maxlength=0):
             user['name'],
             url_for('user.read', id=user['name'])),
         'email': display_email,
-        'userroles': user_organization_roles,
+        'userroles': memberships_display,
     }
