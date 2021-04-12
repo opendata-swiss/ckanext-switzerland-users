@@ -56,12 +56,10 @@ class OgdchUserController(UserController):
 
 def _get_role_selection(current_user, userroles):
     """get selection of roles"""
-    userroles_display = [{'text': 'Role: all', 'value': ''}]  # noqa
+    userroles_display = [{'text': _('Role: all'), 'value': ''}]  # noqa
     if authz.is_sysadmin(current_user):
         userroles_display.append({'text': 'Sysadmin', 'value': 'sysadmin'})
     userroles_display.extend(list(userroles))
-    log.error("=================set user roles")
-    log.error("userroles")
     return userroles_display
 
 
@@ -69,7 +67,7 @@ def _get_organization_selection(organization_tree, allowed_organizations):
     """get selection of organizations"""
     if not allowed_organizations:
         return []
-    organizations_display = [{'text': 'Organization: all', 'value': ''}]  # noqa
+    organizations_display = [{'text': _('Organization: all'), 'value': ''}]  # noqa
     for organization in organization_tree:
         if organization['name'] in allowed_organizations:
             organizations_display.append(_prepare_organization_select_item(organization))  # noqa
