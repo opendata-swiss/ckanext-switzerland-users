@@ -30,3 +30,4 @@ Then update the `po` files with:
 Now the translations can be filled in. After that compile the po files into mo files:
 
     python setup.py compile_catalog
+
