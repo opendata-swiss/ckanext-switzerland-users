@@ -53,5 +53,15 @@ setup(
     entry_points='''
     [ckan.plugins]
         ogdch_users=ckanext.switzerland_users.plugin:OgdchUsersPlugin
-    '''
+    [babel.extractors]
+        ckan = ckan.lib.extract:extract_ckan        
+    ''',
+
+    message_extractors={
+        'ckanext': [
+            ('**.py', 'python', None),
+            ('**.js', 'javascript', None),
+            ('**/templates/**.html', 'ckan', None),
+        ],
+    }
 )
