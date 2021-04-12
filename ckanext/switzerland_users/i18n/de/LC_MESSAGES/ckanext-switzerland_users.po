@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-switzerland_users 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-04-12 10:16+0000\n"
+"POT-Creation-Date: 2021-04-12 12:03+0000\n"
 "PO-Revision-Date: 2021-04-12 08:45+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -63,7 +63,6 @@ msgid "No users match your search"
 msgstr "Keine Benutzer passen zu den Suchkriterien"
 
 #: ckanext/switzerland_users/templates/user/snippets/helper.html:4
-#, fuzzy
 msgid "Authorizations"
 msgstr "Berechtigungen"
 
