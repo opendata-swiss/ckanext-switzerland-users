@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-switzerland_users 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-04-12 08:44+0000\n"
+"POT-Creation-Date: 2021-04-12 12:03+0000\n"
 "PO-Revision-Date: 2021-04-12 08:45+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -22,69 +22,83 @@ msgstr ""
 #: ckanext/switzerland_users/controllers.py:37
 #: ckanext/switzerland_users/controllers.py:41
 msgid "Not authorized to see this page"
-msgstr ""
+msgstr "Vous ne disposez pas des autorisations requises pour accéder à cette page"
+
+#: ckanext/switzerland_users/controllers.py:59
+msgid "Role: all"
+msgstr "Rôle: toutes"
+
+#: ckanext/switzerland_users/controllers.py:70
+msgid "Organization: all"
+msgstr "Organisation: toutes"
 
 #: ckanext/switzerland_users/templates/user/ogdch_list.html:9
 msgid "Add User"
-msgstr ""
+msgstr "Ajouter un utilisateur"
 
 #: ckanext/switzerland_users/templates/user/ogdch_list.html:12
 #: ckanext/switzerland_users/templates/user/snippets/user_search.html:6
 msgid "Users"
-msgstr ""
+msgstr "Utilisateur"
 
 #: ckanext/switzerland_users/templates/user/ogdch_list.html:19
 msgid "Username"
-msgstr ""
+msgstr "Nom d'utilisateur"
 
 #: ckanext/switzerland_users/templates/user/ogdch_list.html:21
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: ckanext/switzerland_users/templates/user/ogdch_list.html:23
 #: ckanext/switzerland_users/templates/user/snippets/user_search.html:27
 msgid "Role"
-msgstr ""
+msgstr "Rôle"
 
 #: ckanext/switzerland_users/templates/user/ogdch_list.html:40
 msgid "Sysadmin"
-msgstr ""
+msgstr "Sysadmin"
 
 #: ckanext/switzerland_users/templates/user/ogdch_list.html:52
 msgid "No users match your search"
-msgstr ""
+msgstr "Aucun utilisateur ne correspond à votre recherche"
 
 #: ckanext/switzerland_users/templates/user/snippets/helper.html:4
-msgid "authorizations"
-msgstr ""
+#, fuzzy
+msgid "Authorizations"
+msgstr "Authorisations"
 
 #: ckanext/switzerland_users/templates/user/snippets/helper.html:8
 msgid "Sysadmins are allowed to see all users."
-msgstr ""
+msgstr "Les administrateurs système voient tous les utilisateurs."
 
 #: ckanext/switzerland_users/templates/user/snippets/helper.html:9
 msgid "Admins are allowed to see all users in their organizations."
-msgstr ""
+msgstr "Les administrateurs voient les utilisateurs de leur organisation."
 
 #: ckanext/switzerland_users/templates/user/snippets/helper.html:11
 msgid ""
 "Roles cascade to suborganizations. User roles in suborganizations are "
 "only shown if they differ from the role in the top level organization"
 msgstr ""
+"Les rôles dans les organisations supérieures sont automatiquement "
+"transférés à toutes les sous-organisations, à moins qu'ils ne soient "
+"explicitement attribués différemment dans les sous-organisations. Ce "
+"n'est que dans ce cas que les rôles dans les sous-organisations sont "
+"inclus dans la liste."
 
 #: ckanext/switzerland_users/templates/user/snippets/user_search.html:12
 msgid "Search Users"
-msgstr ""
+msgstr "Recherche d'utilisateurs"
 
 #: ckanext/switzerland_users/templates/user/snippets/user_search.html:18
 msgid "Search"
-msgstr ""
+msgstr "Recherche"
 
 #: ckanext/switzerland_users/templates/user/snippets/user_search.html:30
 msgid "Organizations"
-msgstr ""
+msgstr "Organisations"
 
 #: ckanext/switzerland_users/templates/user/snippets/user_search.html:33
 msgid "Reset search"
-msgstr ""
+msgstr "Réinitialiser la recherche"
 
