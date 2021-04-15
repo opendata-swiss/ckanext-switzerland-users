@@ -63,7 +63,6 @@ msgid "No users match your search"
 msgstr "Aucun utilisateur ne correspond à votre recherche"
 
 #: ckanext/switzerland_users/templates/user/snippets/helper.html:4
-#, fuzzy
 msgid "Authorizations"
 msgstr "Authorisations"
 
