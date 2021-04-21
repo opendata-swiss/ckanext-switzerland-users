@@ -26,11 +26,11 @@ msgstr "Vous ne disposez pas des autorisations requises pour accéder à cette p
 
 #: ckanext/switzerland_users/controllers.py:59
 msgid "Role: all"
-msgstr "Rôle: toutes"
+msgstr "tous les rôles"
 
 #: ckanext/switzerland_users/controllers.py:70
 msgid "Organization: all"
-msgstr "Organisation: toutes"
+msgstr "toutes les organisations"
 
 #: ckanext/switzerland_users/templates/user/ogdch_list.html:9
 msgid "Add User"
