@@ -73,9 +73,12 @@ class OgdchUserController(UserController):
             _("Role")]
         )
         for user in users:
+            email = user.get('email', '')
+            if not email:
+                email = ''
             writer.writerow([
                 user['name'].encode('utf-8'),
-                user['email'].encode('utf-8'),
+                email.encode('utf-8'),
                 ogdch_display_memberships(user).encode('utf-8')
             ])
         return content.getvalue()
