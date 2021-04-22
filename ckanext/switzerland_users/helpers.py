@@ -15,7 +15,7 @@ def ogdch_list_user(user, maxlength=0):
             memberships_display.append(tags.link_to(
                 role.capacity.capitalize() + ": " + get_localized_value_for_display(role.organization.title),  # noqa
                 url_for('organization_read', action='read', id=role.organization.name)))  # noqa
-    display_email = user.get('email', '-')
+    display_email = user.get('email')
     if not display_email:
         display_email = ''
     return {
