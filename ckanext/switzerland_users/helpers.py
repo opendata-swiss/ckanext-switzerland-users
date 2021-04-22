@@ -3,6 +3,7 @@
 from webhelpers.html import tags
 from ckan.lib.helpers import url_for
 from ckanext.switzerland.helpers.frontend_helpers import get_localized_value_for_display  # noqa
+from ckanext.switzerland_users.logic import Membership, Organization
 
 
 def ogdch_list_user(user, maxlength=0):
@@ -14,7 +15,7 @@ def ogdch_list_user(user, maxlength=0):
             memberships_display.append(tags.link_to(
                 role.capacity.capitalize() + ": " + get_localized_value_for_display(role.organization.title),  # noqa
                 url_for('organization_read', action='read', id=role.organization.name)))  # noqa
-    display_email = user.get('email', '-')
+    display_email = user.get('email')
     if not display_email:
         display_email = ''
     return {
@@ -24,3 +25,18 @@ def ogdch_list_user(user, maxlength=0):
         'email': display_email,
         'userroles': memberships_display,
     }
+
+def ogdch_display_memberships(user):
+    """format user memberships for writing to csv"""
+    user_memberships = user.get('memberships', [])
+    memberships_display = []
+    if user.get('sysadmin'):
+        memberships_display = 'Sysadmin'
+    else:
+        for role in user_memberships:
+            memberships_display.append(
+                role.capacity.capitalize() + ": " +
+                get_localized_value_for_display(role.organization.title))
+        memberships_display = ', '.join(memberships_display)
+
+    return memberships_display

@@ -58,4 +58,8 @@ class OgdchUsersPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     controller='ckanext.switzerland_users.controllers:OgdchUserController',  # noqa
                     action='index')
 
+        map.connect('/users_csv',
+                    controller='ckanext.switzerland_users.controllers:OgdchUserController',  # noqa
+                    action='csv')
+
         return map
