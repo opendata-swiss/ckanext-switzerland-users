@@ -3,7 +3,6 @@
 from webhelpers.html import tags
 from ckan.lib.helpers import url_for
 from ckanext.switzerland.helpers.frontend_helpers import get_localized_value_for_display  # noqa
-from ckanext.switzerland_users.logic import Membership, Organization
 
 
 def ogdch_list_user(user, maxlength=0):
@@ -25,6 +24,7 @@ def ogdch_list_user(user, maxlength=0):
         'email': display_email,
         'userroles': memberships_display,
     }
+
 
 def ogdch_display_memberships(user):
     """format user memberships for writing to csv"""
