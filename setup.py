@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages  # Always prefer setuptools over distutils
+from setuptools import setup, find_packages
 from os import path
 
 here = path.abspath(path.dirname(__file__))
@@ -33,7 +33,7 @@ setup(
         'Development Status :: 4 - Beta',
 
         # Pick your license as you wish (should match "license" above)
-        'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',
+        'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',  # noqa
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
@@ -54,7 +54,7 @@ setup(
     [ckan.plugins]
         ogdch_users=ckanext.switzerland_users.plugin:OgdchUsersPlugin
     [babel.extractors]
-        ckan = ckan.lib.extract:extract_ckan        
+        ckan = ckan.lib.extract:extract_ckan
     ''',
 
     message_extractors={

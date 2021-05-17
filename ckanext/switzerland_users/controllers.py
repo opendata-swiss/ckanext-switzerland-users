@@ -84,7 +84,6 @@ class OgdchUserController(UserController):
         return content.getvalue()
 
 
-
 def _get_role_selection(current_user, userroles):
     """get selection of roles"""
     userroles_display = [{'text': _('Role: all'), 'value': ''}]  # noqa
