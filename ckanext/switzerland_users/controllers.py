@@ -51,6 +51,7 @@ class OgdchUserController(UserController):
         c.pagination = _get_pagination(request, len(users), page_size)
         c.roles = _get_role_selection(c.user, userroles)
         c.organizations = _get_organization_selection(organization_tree, user_admin_organizations)  # noqa
+        c.env = config.get('ckanext.switzerland_users.env', '')
 
         c.page = {
             'users': users[c.pagination.get('offset', 0):c.pagination.get('offset', 0) + page_size],  # noqa
