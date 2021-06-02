@@ -14,16 +14,16 @@ This ckan extensions adds a user search and user display by organization and rol
 
 ## Update translations
 
-To generate an updated ckanext-switzerland.pot file inside the Docker
+To generate an updated ckanext-switzerland_users.pot file inside the Docker
 container, use the following commands:
 
     docker-compose exec ckan bash
     source /usr/lib/ckan/venv/bin/activate
-    cd /usr/lib/ckanext/ckanext-switzerland-ng/
+    cd /usr/lib/ckanext/ckanext-switzerland_users/
     python setup.py extract_messages
 
 Copy any new strings that you want to translate from the new
-`ckanext-switzerland.pot` into the `ckanext-switzerland.po` file for each
+`ckanext-switzerland_users.pot` into the `ckanext-switzerland_users.po` file for each
 language, and add the translations.
 
 After that compile the po files into mo files:
