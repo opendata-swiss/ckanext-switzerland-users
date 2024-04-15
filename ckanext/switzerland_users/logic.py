@@ -99,7 +99,6 @@ def ogdch_user_list(context, data_dict):
     q = data_dict.get('q')
     q_organization = data_dict.get('organization')
     q_role = data_dict.get('role')
-    admin_organizations_for_user = tk.get_action('ogdch_get_admin_organizations_for_user')(context, data_dict)
     user_list_names_only = tk.get_action('user_list')(
         context,
         {'q': q, 'all_fields': False}
