@@ -42,7 +42,7 @@ class OgdchUsersPlugin(plugins.SingletonPlugin, DefaultTranslation):
         Provide template helper functions
         """
         return {
-            'ogdch_list_user': ogdch_user_helpers.ogdch_list_user,  # noqa
+            'ogdch_list_user': ogdch_user_helpers.ogdch_list_user,
         }
 
     # IRouter
