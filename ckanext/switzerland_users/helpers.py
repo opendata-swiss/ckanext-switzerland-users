@@ -2,7 +2,8 @@
 
 from webhelpers.html import tags
 from ckan.lib.helpers import url_for
-from ckanext.switzerland.helpers.frontend_helpers import get_localized_value_for_display  # noqa
+from ckanext.switzerland.helpers.frontend_helpers import \
+    get_localized_value_for_display
 
 
 def ogdch_list_user(user, maxlength=0):
@@ -11,9 +12,16 @@ def ogdch_list_user(user, maxlength=0):
     memberships_display = []
     if not user.get('sysadmin'):
         for role in user_memberships:
+            text = role.capacity.capitalize() + ": " + \
+                   get_localized_value_for_display(role.organization.title)
             memberships_display.append(tags.link_to(
-                role.capacity.capitalize() + ": " + get_localized_value_for_display(role.organization.title),  # noqa
-                url_for('organization_read', action='read', id=role.organization.name)))  # noqa
+                text,
+                url_for(
+                    'organization_read',
+                    action='read',
+                    id=role.organization.name
+                )
+            ))
     display_email = user.get('email')
     if not display_email:
         display_email = ''

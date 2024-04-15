@@ -40,21 +40,27 @@ class OgdchUserController(UserController):
         except tk.NotAuthorized:
             tk.abort(403, _('Not authorized to see this page'))
 
-        user_admin_organizations = tk.get_action('ogdch_get_admin_organizations_for_user')(context, {})  # noqa
+        user_admin_organizations = tk.get_action(
+            'ogdch_get_admin_organizations_for_user')(context, {})
         if not user_admin_organizations:
             tk.abort(403, _('Not authorized to see this page'))
 
         users = tk.get_action('ogdch_user_list')(context, data_dict)
-        organization_tree = tk.get_action('group_tree')(context, {'type': 'organization'})  # noqa
-        userroles = tk.get_action('member_roles_list')(context, {'group_type': 'organization'})  # noqa
+        organization_tree = tk.get_action(
+            'group_tree')(context, {'type': 'organization'})
+        userroles = tk.get_action(
+            'member_roles_list')(context, {'group_type': 'organization'})
 
         c.pagination = _get_pagination(request, len(users), page_size)
         c.roles = _get_role_selection(c.user, userroles)
-        c.organizations = _get_organization_selection(organization_tree, user_admin_organizations)  # noqa
+        c.organizations = _get_organization_selection(
+            organization_tree, user_admin_organizations
+        )
         c.env = config.get('ckanext.switzerland_users.env', '')
 
+        offset = c.pagination.get('offset', 0)
         c.page = {
-            'users': users[c.pagination.get('offset', 0):c.pagination.get('offset', 0) + page_size],  # noqa
+            'users': users[offset:offset + page_size],
         }
         return render('user/ogdch_list.html')
 
@@ -87,7 +93,7 @@ class OgdchUserController(UserController):
 
 def _get_role_selection(current_user, userroles):
     """get selection of roles"""
-    userroles_display = [{'text': _('Role: all'), 'value': ''}]  # noqa
+    userroles_display = [{'text': _('Role: all'), 'value': ''}]
     if authz.is_sysadmin(current_user):
         userroles_display.append({'text': 'Sysadmin', 'value': 'sysadmin'})
     userroles_display.extend(list(userroles))
@@ -98,19 +104,27 @@ def _get_organization_selection(organization_tree, allowed_organizations):
     """get selection of organizations"""
     if not allowed_organizations:
         return []
-    organizations_display = [{'text': _('Organization: all'), 'value': ''}]  # noqa
+    organizations_display = [{'text': _('Organization: all'), 'value': ''}]
     for organization in organization_tree:
         if organization['name'] in allowed_organizations:
-            organizations_display.append(_prepare_organization_select_item(organization))  # noqa
+            organizations_display.append(
+                _prepare_organization_select_item(organization)
+            )
         for suborganization in organization.get('children'):
             if suborganization['name'] in allowed_organizations:
-                organizations_display.append(_prepare_organization_select_item(suborganization, is_suborganization=True))  # noqa
+                organizations_display.append(
+                    _prepare_organization_select_item(
+                        suborganization, is_suborganization=True
+                    )
+                )
     return organizations_display
 
 
 def _prepare_organization_select_item(organization, is_suborganization=False):
     """format select one organization select item"""
-    organization_text = get_localized_value_for_display(organization.get('title'))  # noqa
+    organization_text = get_localized_value_for_display(
+        organization.get('title')
+    )
     if is_suborganization:
         organization_text = "-" + organization_text
     return {'text': organization_text,
